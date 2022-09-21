@@ -1,10 +1,13 @@
 <?php
-$user = "root";
-$password = "";
-$hostname = "localhost";
-$database = "impresoras-abdala";
 
-$mysql=new mysqli($hostname,$user,$password,$database);
-if ($mysql->connect_error)
-  die("Problemas con la conexion a la base de datos");
+function retornarConexion() {
+    $server="localhost";
+    $usuario="root";
+    $clave="";
+    $base="impresoras-abdala";
+    
+    $con=mysqli_connect($server,$usuario,$clave,$base) or die("problemas") ;
+    mysqli_set_charset($con,'utf8'); 
+    return $con;
+}
 ?>
