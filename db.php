@@ -2,6 +2,9 @@
 $user = "root";
 $password = "";
 $hostname = "localhost";
-$database = "test";
-$connection = mysql_connect($hostname, $username, $password) or die("Unable to connect to MySQL");
+$database = "impresoras-abdala";
+
+$mysql=new mysqli($hostname,$user,$password,$database);
+if ($mysql->connect_error)
+  die("Problemas con la conexion a la base de datos");
 ?>
