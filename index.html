@@ -122,13 +122,13 @@
             }],
             "columnDefs": [{
                 "targets": 5,
-                "data": null,
-                "defaultContent": "<button class='btn btn-sm btn-warning'>Modificar</button>"
+                "defaultContent": "<button class='btn btn-sm btn-warning botonmodificar'>Modificar</button>",
+                "data": null
             },
             {
                 "targets": 6,
-                "data": null,
-                "defaultContent": "<button class='btn btn-sm btn-danger'>Borrar</button>"
+                "defaultContent": "<button class='btn btn-sm btn-danger botonborrar'>Borrar</button>",
+                "data": null
             }],
             "language": {
             "url": "DataTables/spanish.json",
@@ -222,39 +222,38 @@
         }
 
         function recuperarRegistro(codigo) {
-            $.ajax({
-                type: 'GET',
-                url: 'datos.php?accion=consultar&codigo=' + codigo,
-                data: '',
-                success: function (datos) {
-                    let registro = JSON.parse(datos);
-                    $('#codigo').val(registro.codigo);
-                    $('#modelo').val(registro.modelo);
-                    $('#color').val(registro.color);
-                    $('#tipo').val(registro.tipo);
-                    $('#precio').val(registro.precio);
-                    $("#FormularioArticulo").modal('show');
-                },
-                error: function () {
-                    alert("Hay un problema");
-                }
-            });
+          $.ajax({
+            type: 'GET',
+            url: 'datos.php?accion=consultar&codigo=' + codigo,
+            data: '',
+            success: function(datos) {
+              $('#codigo').val(datos[0].codigo);
+              $('#modelo').val(datos[0].modelo);
+              $('#color').val(datos[0].color);
+              $('#tipo').val(datos[0].tipo);
+              $('#precio').val(datos[0].precio);
+              $("#FormularioArticulo").modal('show');
+            },
+            error: function() {
+              alert("Hay un problema");
+            }
+          });
         }
 
-        function modificarRegistro(registro) {
-            $.ajax({
-                type: 'POST',
-                url: 'datos.php?accion=modificar&codigo=' + registro.codigo,
-                data: registro,
-                success: function (msg) {
-                    tabla1.ajax.reload();
-                },
-                error: function () {
-                    alert("Hay un problema");
-                }
-            });
-        }
-    });
+        function modificarRegistro(registro) {}
+        $.ajax({
+            type: 'POST',
+            url: 'datos.php?accion=modificar=' + registro.codigo,
+            data: registro,
+            success: function(msg) {
+                tabla1.ajax.reload();
+            },
+            error: function() {
+                alert("Hay un problema");
+            }
+        });
+            
+        });
     </script>
 </body>
 </html>
