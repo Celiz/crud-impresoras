@@ -1,6 +1,5 @@
 <?php
 header('Content-Type: application/json');
-
 require("db.php");
 $conexion = retornarConexion();
 
@@ -12,7 +11,7 @@ switch ($_GET['accion']) {
         break;
 
     case 'agregar':
-        $respuesta = mysqli_query($conexion, "insert into impresoras(modelo, color, tipo, precio) values ('$_POST[modelo]', '$_POST[color]', '$_POST[tipo]', '$_POST[precio]')");
+        $respuesta = mysqli_query($conexion, "insert into impresoras (codigo,modelo, color, tipo, precio) values ('$_POST[codigo]', '$_POST[modelo]', '$_POST[color]', '$_POST[tipo]', '$_POST[precio]')");
         echo json_encode($respuesta);
         break;
 
@@ -28,7 +27,7 @@ switch ($_GET['accion']) {
         break;
 
     case 'modificar':
-        $respuesta = mysqli_query($conexion, "update impresoras set modelo='$_POST[modelo]', color='$_POST[color]', tipo='$_POST[tipo]', precio='$_POST[precio]' where codigo=$_POST[codigo]");
+        $respuesta = mysqli_query($conexion, "UPDATE impresoras set modelo='$_POST[modelo]', color='$_POST[color]', tipo='$_POST[tipo]', precio='$_POST[precio]' where codigo=$_GET[codigo]");
         echo json_encode($respuesta);
         break;
 }
